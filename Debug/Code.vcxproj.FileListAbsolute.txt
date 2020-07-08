@@ -1,0 +1,5 @@
+D:\Intrinsic\PlatformOneProjects\Refactoring Checkpoint\RefactoringCheckpoint\Debug\Code.vcxproj.CopyComplete
+D:\Intrinsic\PlatformOneProjects\Refactoring Checkpoint\RefactoringCheckpoint\Debug\Code.exe
+D:\Intrinsic\PlatformOneProjects\Refactoring Checkpoint\RefactoringCheckpoint\Debug\Code.pdb
+D:\Intrinsic\PlatformOneProjects\Refactoring Checkpoint\RefactoringCheckpoint\Debug\gtest.pdb
+D:\Intrinsic\PlatformOneProjects\Refactoring Checkpoint\RefactoringCheckpoint\Debug\gtest_main.pdb
