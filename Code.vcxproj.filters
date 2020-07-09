@@ -4,6 +4,9 @@
     <ClCompile Include="GildedRose.cc">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="GildedRoseTester.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GildedRose.h">

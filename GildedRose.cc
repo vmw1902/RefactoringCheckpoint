@@ -1,80 +1,68 @@
 #include "GildedRose.h"
+#include <map>
+#include <string>
+using namespace std;
 
 GildedRose::GildedRose(vector<Item> & items) : items(items)
 {}
-    
-void GildedRose::updateQuality() 
+
+bool GildedRose::qualityDegradesNormally(Item item) {
+    if (item.name == "Aged Brie" || item.name == "Backstage passes to a TAFKAL80ETC concert" || item.name == "Sulfuras, Hand of Ragnaros") {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+bool GildedRose::isConcert(Item item) {
+    return item.name == "Backstage passes to a TAFKAL80ETC concert";
+}
+
+bool GildedRose::isSulfuras(Item item) {
+    return item.name == ("Sulfuras, Hand of Ragnaros");
+}
+
+bool GildedRose::isBrie(Item item) {
+    return item.name == "Aged Brie";
+}
+
+bool GildedRose::pastSellByDate(Item item) {
+    if (item.sellIn < 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool GildedRose::updateQuality() 
 {
-    for (int i = 0; i < items.size(); i++)
+    for (Item item : items)
     {
-        if (items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert")
-        {
-            if (items[i].quality > 0)
+        if (item.quality < 50 && item.quality > 0) {            
+            if (qualityDegradesNormally(item))
             {
-                if (items[i].name != "Sulfuras, Hand of Ragnaros")
-                {
-                    items[i].quality = items[i].quality - 1;
-                }
-            }
-        }
-        else
-        {
-            if (items[i].quality < 50)
-            {
-                items[i].quality = items[i].quality + 1;
-
-                if (items[i].name == "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (items[i].sellIn < 11)
-                    {
-                        if (items[i].quality < 50)
-                        {
-                            items[i].quality = items[i].quality + 1;
-                        }
-                    }
-
-                    if (items[i].sellIn < 6)
-                    {
-                        if (items[i].quality < 50)
-                        {
-                            items[i].quality = items[i].quality + 1;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (items[i].name != "Sulfuras, Hand of Ragnaros")
-        {
-            items[i].sellIn = items[i].sellIn - 1;
-        }
-
-        if (items[i].sellIn < 0)
-        {
-            if (items[i].name != "Aged Brie")
-            {
-                if (items[i].name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (items[i].quality > 0)
-                    {
-                        if (items[i].name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            items[i].quality = items[i].quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    items[i].quality = items[i].quality - items[i].quality;
-                }
-            }
+                item.quality--;
+            }         
             else
             {
-                if (items[i].quality < 50)
-                {
-                    items[i].quality = items[i].quality + 1;
-                }
+                item.quality++;
+            }           
+            if (pastSellByDate(item)) {
+                item.quality--;
+            }           
+            else if (pastSellByDate(item) && isBrie(item)) {
+                item.quality++;
+            }           
+            else if (pastSellByDate(item) && isConcert(item)) {
+                item.quality = 0;
+            }
+            if (!isSulfuras(item))
+            {
+                item.sellIn = item.sellIn - 1;
             }
         }
     }
+    return true;
 }

@@ -18,7 +18,17 @@ class GildedRose
 public:
     vector<Item> & items;
     GildedRose(vector<Item> & items);
+
+    bool qualityDegradesNormally(Item item);
+
+    bool isConcert(Item item);
+
+    bool isSulfuras(Item item);
+
+    bool isBrie(Item item);
+
+    bool pastSellByDate(Item item);
     
-    void updateQuality();
+    bool updateQuality();
 };
 
